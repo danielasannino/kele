@@ -39,7 +39,7 @@ class Kele
     JSON.parse(response.body)
     end
 
-    def create_message(sender, recipient_id, token = nil, subject, stripped_text)
+    def create_message(sender, recipient_id,  subject, stripped_text, token = nil)
     response = self.class.post("/messages", headers: { "authorization" => @user_auth_token }, body: {
         sender: sender,
         recipient_id: recipient_id,
@@ -47,7 +47,8 @@ class Kele
         subject: subject,
         stripped_text: stripped_text
       })
-      response.success? puts "Your message has been sent."
+      puts response.inspect
++    puts "Your message has been sent." if response.success?
     end
 
 end
